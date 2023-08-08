@@ -1,0 +1,71 @@
+---
+import img_hero from "../image/img-hero-section.png";
+import img_hero_200x200 from '../image/img-hero-200x200.png'
+import img_hero_350x350 from '../image/img-hero-350x350.png'
+---
+
+<div class="hero">
+  <div class="span-hero">
+    <span>¡Articulos interesantes sobre tecnologías!</span>
+    <p>Mira algunos articulos abajo, en los articulos</p>
+
+  </div>
+  <div>
+    <picture>
+        <source media="(min-width:70em)" srcset={img_hero}>
+        <source media="(min-width:29.43em)" srcset={img_hero_350x350}>
+        <img src={img_hero_200x200} alt="hero-image">
+    </picture>
+  </div>
+</div>
+
+<style>
+  span {
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1.3;
+    /* word-break: break-all; */
+  }
+  .span-hero{
+    width: 40vw;
+  }
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    padding: 3.2em;
+    width: 88vw;
+    margin: 0 auto;
+  }
+  p {
+    color: var(--gray-paragraph);
+    font-size: 1.2em;
+  }
+  @media screen and (max-width: 65em) {
+   .span-hero{
+    width: 80vw;
+   }
+   .hero{
+    width: 90vw;
+    height: 90vh;
+    flex-direction: column;
+   }
+   span{
+    font-size: 3.8em;
+    display: block;
+    margin: 0 auto;
+   }
+  }
+  @media screen and (max-width: 29.43rem){
+    span {
+      font-size: 2.8em;
+    }
+
+    .hero{
+      padding: 1em;
+      height: 70vh;
+    }
+  }
+
+</style>

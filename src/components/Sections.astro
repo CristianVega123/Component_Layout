@@ -1,37 +1,113 @@
 ---
-// const params = new URLSearchParams({
-//   per_page: "20",
-//   tag: "rust, programming",
-//   tags: "rust, programming",
-// });
-// async function obtenerData() {
-//   const data = await fetch(`https://dev.to/api/articles?${params}`, {
-//     headers: {
-//       "Content-Type": "application/json; charset=utf-8",
-//       accept: "application/vnd.forem.api-v1+json",
-//     },
-//   });
-//   let datajson = await data.json();
-//   console.log(datajson);
-// }
-// obtenerData();
+import { imgJSDefault } from "../content";
+interface User {
+  name: string;
+  username: string;
+}
+interface ResponseDEV {
+  title: string;
+  description: string;
+  url: string;
+  tags: string;
+  published_timestamp: string;
+  cover_image: string;
+  user: User;
+}
+
+const params = new URLSearchParams({
+  per_page: "5",
+  tag: "typescript, programming",
+  tags: "typescript, programming",
+});
+async function retrieveData(): Promise<ResponseDEV[]> {
+  const data = await fetch(`https://dev.to/api/articles?${params}`, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      accept: "application/vnd.forem.api-v1+json",
+    },
+  });
+  let datajson = await data.json();
+  return datajson;
+}
+
+let data = await retrieveData();
 ---
 
-<script>
-  const params = new URLSearchParams({
-    per_page: "20",
-    tag: "rust, programming",
-    tags: "rust, programming",
-  });
-  async function obtenerData() {
-    const data = await fetch(`https://dev.to/api/articles?${params}`, {
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        accept: "application/vnd.forem.api-v1+json",
-      },
-    });
-    let datajson = await data.json();
-    console.log(datajson);
+<!-- Aca ira el titulo y una opción de filtrado -->
+<div class="section-container">
+  {
+    data.map((responseDev) => (
+      <div class="section-item">
+        <img
+          class="cover-image"
+          src={responseDev.cover_image ? responseDev.cover_image : imgJSDefault}
+          alt="cover-image"
+        />
+        <div class="section-information">
+          <p class="username">{responseDev.user.name}</p>
+          <h3 class="title-section">{responseDev.title}</h3>
+          <p class="description">{responseDev.description}</p>
+          <a class="url-article" href={responseDev.url} target="_blank">
+            Lee el artículo <img src="/arrow-right.svg" alt=""/>
+          </a> 
+        </div>
+      </div>
+    ))
   }
-  obtenerData();
-</script>
+</div>
+
+<style>
+  .section-container {
+    /* width: 100vw; */
+    display: grid;
+    gap: 9em;
+    row-gap: 12em;
+    padding: 3.2em;
+    width: 88vw;
+    margin: 0 auto;
+    grid-template-rows: 20em;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    align-items: center;
+    justify-items: center;
+  }
+  .section-item {
+    width: 19em;
+    height: 12em;
+  }
+  .cover-image,
+  .section-information {
+    width: inherit;
+  }
+  .section-information {
+    padding: 0.6em;
+  }
+  .cover-image {
+    border-radius: 10px 10px 0 0;
+    height: 141px;
+    object-fit: cover;
+    
+  }
+  .title-section {
+    color: var(--ligth-theme-font);
+    font-weight: 800;
+  }
+
+  .description {
+    color: var(--gray-paragraph);
+    margin-top: 0.6em;
+  }
+  .url-article{
+    display: block;
+    margin-top: 0.6em;
+    color: #003fa8;
+    text-decoration: none;
+    width: max-content;
+    font-weight: 500;
+  }
+  @media screen and (max-width: 65em) {
+    .section-item {
+      width: 19em;
+    }
+  }
+</style>

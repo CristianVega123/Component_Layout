@@ -1,0 +1,1 @@
+export const imgJSDefault = "https://mediaprotc.pe/wp-content/uploads/2021/06/javascript-banner.jpg"

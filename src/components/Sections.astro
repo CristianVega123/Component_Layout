@@ -15,7 +15,7 @@ interface ResponseDEV {
 }
 
 const params = new URLSearchParams({
-  per_page: "5",
+  per_page: "4",
   tag: "typescript, programming",
   tags: "typescript, programming",
 });
@@ -34,40 +34,53 @@ let data = await retrieveData();
 ---
 
 <!-- Aca ira el titulo y una opción de filtrado -->
-<div class="section-container">
-  {
-    data.map((responseDev) => (
-      <div class="section-item">
-        <img
-          class="cover-image"
-          src={responseDev.cover_image ? responseDev.cover_image : imgJSDefault}
-          alt="cover-image"
-        />
-        <div class="section-information">
-          <p class="username">{responseDev.user.name}</p>
-          <h3 class="title-section">{responseDev.title}</h3>
-          <p class="description">{responseDev.description}</p>
-          <a class="url-article" href={responseDev.url} target="_blank">
-            Lee el artículo <img src="/arrow-right.svg" alt=""/>
-          </a> 
-        </div>
-      </div>
-    ))
-  }
-</div>
+<div class="article">
+  <div class="title-article">
+    <h2 >Related Article</h2>
 
+  </div>
+  <div class="section-container">
+    {
+      data.map((responseDev) => (
+        <div class="section-item">
+          <img
+            class="cover-image"
+            src={responseDev.cover_image ? responseDev.cover_image : imgJSDefault}
+            alt="cover-image"
+          />
+          <div class="section-information">
+            <h3 class="title-section">{responseDev.title}</h3>
+            <p class="description">{responseDev.description}</p>
+            <a class="url-article" href={responseDev.url} target="_blank">
+              Lee el artículo <img src="/arrow-right.svg" alt=""/>
+            </a> 
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
 <style>
+  .article {
+    margin-bottom: 4em;
+    height: 28em;
+  }
+  .title-article {
+    display: block;
+    width: 88vw;
+    padding: 0 6%;
+    margin: 0 auto;
+  }
   .section-container {
-    /* width: 100vw; */
     display: grid;
     gap: 9em;
     row-gap: 12em;
-    padding: 3.2em;
+    padding: 0 3.2em;
     width: 88vw;
     margin: 0 auto;
     grid-template-rows: 20em;
     grid-auto-flow: dense;
-    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
     align-items: center;
     justify-items: center;
   }
@@ -101,13 +114,24 @@ let data = await retrieveData();
     display: block;
     margin-top: 0.6em;
     color: #003fa8;
-    text-decoration: none;
+    text-decoration: underline;
     width: max-content;
     font-weight: 500;
   }
-  @media screen and (max-width: 65em) {
+@media screen and (max-width: 79em){
+  .article {
+    height: 55em;
+  }
+
+}
+@media screen and (max-width: 65em) {
     .section-item {
       width: 19em;
+    }
+  }
+@media screen and (max-width: 48em) {
+    .article {
+      height: 115em;
     }
   }
 </style>

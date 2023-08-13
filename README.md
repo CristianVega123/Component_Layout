@@ -2,7 +2,7 @@
 
 El componente de ejemplo
 
-(Ejemplo de imagen)[https://github.com/cristianVega123/Component_Layout/blob/main/screen/example.png?raw=true]
+(Ejemplo de imagen)[https://github.com/CristianVega123/Component_Layout/blob/main/screen/example.png]
 
 
 Si descargas el archivo entonces necesitas descargar las dependencias, para descargar debes correr este comando:
